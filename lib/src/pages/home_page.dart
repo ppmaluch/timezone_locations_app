@@ -45,7 +45,8 @@ class _HomePageState extends State<HomePage> {
               Icons.search,
             ),
             onPressed: () {
-              showSearch(context: context, delegate: SearchPage());
+              // showSearch(context: context, delegate: SearchPage());
+              Navigator.pushNamed(context, Environments.searchRoute);
             })
       ],
     );

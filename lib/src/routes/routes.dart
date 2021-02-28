@@ -5,4 +5,5 @@ import 'package:timezone_locations_app/src/utils/utils.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
   Environments.homeRoute: (_) => HomePage(),
+  Environments.searchRoute: (_) => SearchPage(),
 };
