@@ -119,8 +119,6 @@ class _SearchPageState extends State<SearchPage> {
           .fetchTimezone(filteredItem);
       if (result) {
         Navigator.of(context).pop();
-        // Navigator.of(context).pushNamed(Country.routeName,
-        //     arguments: filteredCountries[index]);
       }
     }
   }
