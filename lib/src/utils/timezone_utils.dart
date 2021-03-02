@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 
-class TimezoneProvider {
-  TimezoneProvider();
+class TimezoneUtil {
+  TimezoneUtil();
 
   Future<List<String>> loadTimezone() async {
     final response = await rootBundle.loadString('data/timezone_data.json');
@@ -15,4 +15,4 @@ class TimezoneProvider {
   }
 }
 
-final timezoneProvider = new TimezoneProvider();
+final timezoneProvider = new TimezoneUtil();
