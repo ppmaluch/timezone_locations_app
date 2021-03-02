@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({
-    Key key,
-    @required this.image,
-  }) : super(key: key);
+  const CardWidget({Key key, @required this.image, this.cardText})
+      : super(key: key);
 
   final image;
+  final cardText;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +14,11 @@ class CardWidget extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(right: 15.0),
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: Colors.white70,
           borderRadius: BorderRadius.circular(20.0),
           image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(image),
+            fit: BoxFit.contain,
+            image: AssetImage(image),
           ),
         ),
         child: Align(
@@ -27,8 +26,8 @@ class CardWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              'Australia/Melbourne',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              cardText,
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
           ),
         ),
