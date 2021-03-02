@@ -93,47 +93,50 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20.0,
         ),
+        _headerArea(),
+        SizedBox(
+          height: 15,
+        ),
         _contentArea()
       ],
     );
   }
 
-  Padding _contentArea() {
+  Padding _headerArea() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _selectedTimeZones == 0 ? '' : 'Current Locations',
+            timezones.length == 0 ? '' : 'Current Locations',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(height: 200, child: _cardList())
         ],
       ),
     );
   }
 
   Widget _cardList() {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: timezones.length,
-      itemBuilder: (BuildContext context, int index) {
-        final timezone = timezones[index];
-        return CardWidget(
-            cardText: timezone.timezone, image: 'assets/img/location.png');
-      },
-    );
-    // return ListView(
-    //   scrollDirection: Axis.horizontal,
-    //   children: [
-    //     CardWidget(
-    //         image:
-    //             'https://images.unsplash.com/photo-1613280675731-c21848a85020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMTA2MTF8MHwxfHJhbmRvbXx8fHx8fHx8&ixlib=rb-1.2.1&q=80&w=400')
-    //   ],
-    // );
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 3 / 2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20),
+        itemCount: timezones.length,
+        itemBuilder: (BuildContext ctx, index) {
+          final timezone = timezones[index];
+          return CardWidget(
+              cardText: timezone.timezone, image: 'assets/img/location.png');
+        });
+  }
+
+  Widget _contentArea() {
+    return timezones.length > 0
+        ? Expanded(
+            child: Padding(
+                padding: const EdgeInsets.all(10.0), child: _cardList()))
+        : Container();
   }
 }
