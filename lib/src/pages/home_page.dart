@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:timezone_locations_app/src/pages/search_page.dart';
+import 'package:provider/provider.dart';
+import 'package:timezone_locations_app/src/model/timezone_model.dart';
+import 'package:timezone_locations_app/src/providers/timezone_provider.dart';
 import 'package:timezone_locations_app/src/utils/utils.dart';
 import 'package:timezone_locations_app/src/widget/card_widget.dart';
 
@@ -13,16 +15,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedTimeZones;
+  List<Timezone> timezones;
 
   @override
   void initState() {
-    // TODO: implement initState
-    _selectedTimeZones = 1;
+    _selectedTimeZones = 0;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      timezones = Provider.of<TimezoneProvider>(context).getTimezone();
+      _selectedTimeZones = timezones.length;
+    });
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Color.fromRGBO(244, 243, 243, 1),
@@ -45,7 +51,6 @@ class _HomePageState extends State<HomePage> {
               Icons.search,
             ),
             onPressed: () {
-              // showSearch(context: context, delegate: SearchPage());
               Navigator.pushNamed(context, Environments.searchRoute);
             })
       ],
@@ -100,51 +105,35 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Current Locations',
+            _selectedTimeZones == 0 ? '' : 'Current Locations',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: 15,
           ),
-          Container(
-            height: 200,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                CardWidget(
-                    image:
-                        'https://images.unsplash.com/photo-1613280675731-c21848a85020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMTA2MTF8MHwxfHJhbmRvbXx8fHx8fHx8&ixlib=rb-1.2.1&q=80&w=400'),
-              ],
-            ),
-          )
+          Container(height: 200, child: _cardList())
         ],
       ),
     );
   }
-}
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(244, 243, 243, 1),
-          borderRadius: BorderRadius.circular(15)),
-      child: TextField(
-        decoration: InputDecoration(
-            border: InputBorder.none,
-            prefixIcon: Icon(
-              Icons.search,
-              color: Colors.black87,
-            ),
-            hintText: 'Search TimeZone',
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
-      ),
+  Widget _cardList() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: timezones.length,
+      itemBuilder: (BuildContext context, int index) {
+        final timezone = timezones[index];
+        return CardWidget(
+            cardText: timezone.timezone, image: 'assets/img/location.png');
+      },
     );
+    // return ListView(
+    //   scrollDirection: Axis.horizontal,
+    //   children: [
+    //     CardWidget(
+    //         image:
+    //             'https://images.unsplash.com/photo-1613280675731-c21848a85020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMTA2MTF8MHwxfHJhbmRvbXx8fHx8fHx8&ixlib=rb-1.2.1&q=80&w=400')
+    //   ],
+    // );
   }
 }
