@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timezone_locations_app/src/providers/timezones_provider.dart';
+import 'package:timezone_locations_app/src/utils/utils.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key key}) : super(key: key);
@@ -13,7 +13,6 @@ class _SearchPageState extends State<SearchPage> {
   List<String> itemList = [];
   List filteredItems = [];
   bool _isSearching = false;
-// https://github.com/bitfumes/flutter-country-house/blob/master/lib/Screens/AllCountries.dart
 
   @override
   void initState() {
@@ -40,7 +39,11 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: !_isSearching
-            ? Text('All Timezones')
+            ? Center(
+                child: Text(
+                'All Timezones',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ))
             : TextField(
                 controller: _queryController,
                 autofocus: true,
