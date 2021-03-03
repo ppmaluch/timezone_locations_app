@@ -33,8 +33,8 @@ class _SearchPageState extends State<SearchPage> {
       filteredItems = itemList
           .where((timezone) =>
               timezone.toLowerCase().contains(value.toLowerCase()))
-          .toList()
-          .sublist(0, 10);
+          .toList();
+      // .sublist(0, 10);
     });
   }
 
