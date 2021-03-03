@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:timezone_locations_app/src/providers/timezone_provider.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({Key key, @required this.image, this.cardText})
+  const CardWidget({Key key, @required this.image, this.object})
       : super(key: key);
 
   final image;
-  final cardText;
+  final object;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +23,36 @@ class CardWidget extends StatelessWidget {
             image: AssetImage(image),
           ),
         ),
-        child: Align(
-          alignment: Alignment.bottomLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              cardText,
-              style: TextStyle(color: Colors.black, fontSize: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: () {
+                  Provider.of<TimezoneProvider>(context, listen: false)
+                      .delTimezone(object.timezone);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(color: Colors.redAccent, width: 2)),
+                  child: Text('X'),
+                ),
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  object.timezone,
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
