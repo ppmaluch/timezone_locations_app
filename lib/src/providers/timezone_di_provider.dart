@@ -18,7 +18,7 @@ class TimezoneProvider extends ChangeNotifier {
       setErrorMessage("Error was found!");
     }
 
-    return _isTransaction();
+    return _isTimezone();
   }
 
   void setLoading(value) {
@@ -53,7 +53,7 @@ class TimezoneProvider extends ChangeNotifier {
     return errorMessage;
   }
 
-  bool _isTransaction() {
+  bool _isTimezone() {
     return timezone != null ? true : false;
   }
 }
