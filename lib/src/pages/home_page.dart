@@ -14,12 +14,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int _selectedTimeZones;
   List<Timezone> timezones;
 
   @override
   void initState() {
-    _selectedTimeZones = 0;
     super.initState();
   }
 
@@ -27,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     setState(() {
       timezones = Provider.of<TimezoneProvider>(context).getTimezone();
-      _selectedTimeZones = timezones.length;
     });
     return Scaffold(
         key: _scaffoldKey,
@@ -81,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                 height: 5.0,
               ),
               Text(
-                'Selected TimeZones - ${_selectedTimeZones.toString()}',
+                'Selected TimeZones - ${timezones.length.toString()}',
                 style: TextStyle(color: Colors.black, fontSize: 25.0),
               ),
               SizedBox(
@@ -127,8 +124,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: timezones.length,
         itemBuilder: (BuildContext ctx, index) {
           final timezone = timezones[index];
-          return CardWidget(
-              cardText: timezone.timezone, image: 'assets/img/location.png');
+          return CardWidget(object: timezone, image: 'assets/img/location.png');
         });
   }
 

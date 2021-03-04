@@ -39,6 +39,11 @@ class TimezoneProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void delTimezone(String timezoneName) {
+    timezone.removeWhere((element) => element.timezone == timezoneName);
+    notifyListeners();
+  }
+
   List<Timezone> getTimezone() {
     return timezone;
   }
