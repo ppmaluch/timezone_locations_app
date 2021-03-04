@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     });
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Color.fromRGBO(244, 243, 243, 1),
+        backgroundColor: Theme.of(context).backgroundColor,
         drawer: new Drawer(),
         appBar: _appbar(),
         body: _body());
@@ -88,7 +88,7 @@ class _Header extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.20,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).canvasColor,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(40.0),
           bottomRight: Radius.circular(40.0),
@@ -115,14 +115,14 @@ class _Header extends StatelessWidget {
               Text(
                 Environments.appNameTitle,
                 style: TextStyle(
-                    color: kPrimaryBrown,
+                    color: Theme.of(context).primaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
               Text(
                 "Selected TimeZones: #${timezones.length.toString()}",
                 style: TextStyle(
-                  color: kPrimaryBrown,
+                  color: Theme.of(context).primaryColor,
                   fontSize: 12,
                 ),
               ),
@@ -154,12 +154,14 @@ class _ActionsCard extends StatelessWidget {
               Spacer(),
               Text(
                 "Dark Mode",
-                style: TextStyle(color: kPrimaryBrown),
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
               IconButton(
                 icon: Icon(
                   Icons.lightbulb,
-                  color: kPrimaryBrown,
+                  color: Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
                   print("dark mode on");
@@ -190,7 +192,9 @@ class _TimeZoneCards extends StatelessWidget {
             padding: const EdgeInsets.only(left: 25.0, top: 20, bottom: 12),
             child: Text(
               "TimeZones List",
-              style: TextStyle(color: kPrimaryBrown),
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
           Expanded(
@@ -204,7 +208,7 @@ class _TimeZoneCards extends StatelessWidget {
                     horizontal: 20,
                   ),
                   decoration: BoxDecoration(
-                    color: kPrimaryGrey,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Row(
