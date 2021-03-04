@@ -6,7 +6,4 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider(
     create: (context) => TimezoneProvider(),
   ),
-  // ChangeNotifierProvider(
-  //   create: (context) => TransactionState(),
-  // ),
 ];
