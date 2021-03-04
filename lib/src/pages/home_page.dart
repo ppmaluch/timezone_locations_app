@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone_locations_app/src/model/timezone_model.dart';
-import 'package:timezone_locations_app/src/providers/timezone_provider.dart';
+import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
+import 'package:timezone_locations_app/src/providers/timezone_di_provider.dart';
 import 'package:timezone_locations_app/src/utils/utils.dart';
 import 'package:timezone_locations_app/src/widget/card_widget.dart';
 
@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  List<Timezone> timezones;
+  List<WorldTimezone> timezones;
 
   @override
   void initState() {

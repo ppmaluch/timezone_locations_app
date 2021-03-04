@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone_locations_app/src/providers/timezone_provider.dart';
+import 'package:timezone_locations_app/src/providers/timezone_di_provider.dart';
 import 'package:timezone_locations_app/src/utils/utils.dart';
 
 class SearchPage extends StatefulWidget {
