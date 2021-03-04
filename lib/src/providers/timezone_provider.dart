@@ -5,7 +5,7 @@ import 'package:timezone_locations_app/src/requests/timezone_request.dart';
 import 'dart:convert';
 
 class TimezoneProvider extends ChangeNotifier {
-  List<Timezone> timezone = new List<Timezone>();
+  List<Timezone> timezone = <Timezone>[];
   String errorMessage;
   bool isloading = false;
 
