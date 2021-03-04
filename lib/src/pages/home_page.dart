@@ -59,91 +59,26 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _Header(context: context),
-        // Container(
-        //   decoration: BoxDecoration(
-        //       color: Colors.white,
-        //       borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
-        //   padding: EdgeInsets.all(20.0),
-        //   child: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: [
-        //       Text(
-        //         Environments.appNameTitle,
-        //         style: TextStyle(
-        //           color: Colors.black87,
-        //           fontSize: 40.0,
-        //           fontWeight: FontWeight.bold,
-        //         ),
-        //       ),
-        //       SizedBox(
-        //         height: 5.0,
-        //       ),
-        //       Text(
-        //         'Selected TimeZones - ${timezones.length.toString()}',
-        //         style: TextStyle(color: Colors.black, fontSize: 25.0),
-        //       ),
-        //       SizedBox(
-        //         height: 20.0,
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        // SizedBox(
-        //   height: 20.0,
-        // ),
-        // _headerArea(),
-        SizedBox(
-          height: 15,
+        _Header(
+          context: context,
+          timezones: timezones,
         ),
-        _contentArea()
+        _ActionsCard(),
+        _TimeZoneCards(
+          timezones: timezones,
+        )
       ],
     );
-  }
-
-  Padding _headerArea() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            timezones.length == 0 ? '' : 'Current Locations',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _cardList() {
-    return GridView.builder(
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20),
-        itemCount: timezones.length,
-        itemBuilder: (BuildContext ctx, index) {
-          final timezone = timezones[index];
-          return CardWidget(object: timezone, image: 'assets/img/location.png');
-        });
-  }
-
-  Widget _contentArea() {
-    return timezones.length > 0
-        ? Expanded(
-            child: Padding(
-                padding: const EdgeInsets.all(10.0), child: _cardList()))
-        : Container();
   }
 }
 
 // View one style
 class _Header extends StatelessWidget {
+  final List<WorldTimezone> timezones;
   const _Header({
     Key key,
     @required this.context,
+    this.timezones,
   }) : super(key: key);
 
   final BuildContext context;
@@ -167,7 +102,7 @@ class _Header extends StatelessWidget {
             child: CircleAvatar(
               radius: 55.0,
               backgroundColor: Colors.white,
-              backgroundImage: AssetImage("assets/images/timeZoneHeader.png"),
+              backgroundImage: AssetImage("assets/img/timeZoneHeader.png"),
             ),
           ),
           SizedBox(
@@ -185,7 +120,7 @@ class _Header extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "Selected TimeZones: #12",
+                "Selected TimeZones: #${timezones.length.toString()}",
                 style: TextStyle(
                   color: kPrimaryBrown,
                   fontSize: 12,
@@ -219,12 +154,12 @@ class _ActionsCard extends StatelessWidget {
               Spacer(),
               Text(
                 "Dark Mode",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: kPrimaryBrown),
               ),
               IconButton(
                 icon: Icon(
                   Icons.lightbulb,
-                  color: Colors.white,
+                  color: kPrimaryBrown,
                 ),
                 onPressed: () {
                   print("dark mode on");
@@ -239,8 +174,10 @@ class _ActionsCard extends StatelessWidget {
 }
 
 class _TimeZoneCards extends StatelessWidget {
+  final List<WorldTimezone> timezones;
   const _TimeZoneCards({
     Key key,
+    this.timezones,
   }) : super(key: key);
 
   @override
@@ -253,13 +190,13 @@ class _TimeZoneCards extends StatelessWidget {
             padding: const EdgeInsets.only(left: 25.0, top: 20, bottom: 12),
             child: Text(
               "TimeZones List",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: kPrimaryBrown),
             ),
           ),
           Expanded(
             child: StaggeredGridView.countBuilder(
               crossAxisCount: 4,
-              itemCount: 8,
+              itemCount: timezones.length != null ? timezones.length : 1,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   margin: const EdgeInsets.symmetric(
@@ -271,32 +208,73 @@ class _TimeZoneCards extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // SizedBox(
-                      //   height: MediaQuery.of(context).size.height * 0.25,
-                      //   child: CircleAvatar(
-                      //     radius: 25.0,
-                      //     backgroundColor: Colors.white,
-                      //     backgroundImage:
-                      //         AssetImage("assets/images/timeZoneHeader.png"),
-                      //   ),
-                      // ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "America/Havana",
-                            style: TextStyle(
-                                color: kPrimaryBrown,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                timezones[index].timezone.split("/").last,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Provider.of<TimezoneProvider>(context,
+                                            listen: false)
+                                        .delTimezone(timezones[index].timezone);
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    // decoration: BoxDecoration(
+                                    //   borderRadius: BorderRadius.circular(20.0),
+                                    //   border: Border.all(
+                                    //     color: Colors.redAccent,
+                                    //     width: 2,
+                                    //   ),
+                                    // ),
+                                    child: Text(
+                                      '[X]',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${timezones[index].dayOfWeek}/w",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.05,
+                              ),
+                              Text(
+                                "${timezones[index].dayOfYear}/d",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
                           Text(
-                            "12/w",
+                            "${TimezoneUtil.getTimeStamp(timezones[index])}",
                             style: TextStyle(
-                              color: kPrimaryBrown,
+                              color: Colors.white,
                               fontSize: 12,
                             ),
                           ),
@@ -318,3 +296,82 @@ class _TimeZoneCards extends StatelessWidget {
     );
   }
 }
+
+
+
+// old style save for check and discus
+
+
+  // Container(
+  //   decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+  //   padding: EdgeInsets.all(20.0),
+  //   child: Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         Environments.appNameTitle,
+  //         style: TextStyle(
+  //           color: Colors.black87,
+  //           fontSize: 40.0,
+  //           fontWeight: FontWeight.bold,
+  //         ),
+  //       ),
+  //       SizedBox(
+  //         height: 5.0,
+  //       ),
+  //       Text(
+  //         'Selected TimeZones - ${timezones.length.toString()}',
+  //         style: TextStyle(color: Colors.black, fontSize: 25.0),
+  //       ),
+  //       SizedBox(
+  //         height: 20.0,
+  //       ),
+  //     ],
+  //   ),
+  // ),
+  // SizedBox(
+  //   height: 20.0,
+  // ),
+  // _headerArea(),
+  // SizedBox(
+  //   height: 15,
+  // ),
+  // _contentArea()
+  // Padding _headerArea() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           timezones.length == 0 ? '' : 'Current Locations',
+  //           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _cardList() {
+  //   return GridView.builder(
+  //       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+  //           maxCrossAxisExtent: 200,
+  //           childAspectRatio: 3 / 2,
+  //           crossAxisSpacing: 20,
+  //           mainAxisSpacing: 20),
+  //       itemCount: timezones.length,
+  //       itemBuilder: (BuildContext ctx, index) {
+  //         final timezone = timezones[index];
+  //         return CardWidget(object: timezone, image: 'assets/img/location.png');
+  //       });
+  // }
+
+  // Widget _contentArea() {
+  //   return timezones.length > 0
+  //       ? Expanded(
+  //           child: Padding(
+  //               padding: const EdgeInsets.all(10.0), child: _cardList()))
+  //       : Container();
+  // }
