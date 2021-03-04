@@ -3,7 +3,7 @@ import 'package:timezone_locations_app/features/world_timezone/di/DI.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 
 class TimezoneProvider extends ChangeNotifier {
-  List<WorldTimezone> timezone = new List<WorldTimezone>();
+  List<WorldTimezone> timezone = <WorldTimezone>[];
   String errorMessage;
   bool isloading = false;
 
