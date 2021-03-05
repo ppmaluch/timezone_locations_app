@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone_locations_app/src/providers/providers.dart';
-import 'package:timezone_locations_app/src/routes/routes.dart';
-import 'package:timezone_locations_app/src/utils/theme_utils.dart';
-import 'package:timezone_locations_app/src/utils/utils.dart';
+import 'package:timezone_locations_app/core/res/theme_utils.dart';
+import 'package:timezone_locations_app/core/res/utils.dart';
+
+import 'core/presentation/notifiers/providers.dart';
+import 'core/presentation/routes.dart';
 
 void main() {
   runApp(MyApp());
