@@ -7,11 +7,12 @@ class MyTheme {
         backgroundColor: kBackgroundLight,
         canvasColor: kAppBarThemeLigth,
         primaryColor: kPrimaryText,
+        textTheme: TextTheme(bodyText2: TextStyle(color: kPrimaryText)),
         cardColor: kAppBarThemeLigth,
         appBarTheme: AppBarTheme(
-          color: Colors.white,
+          color: kAppBarThemeLigth,
           brightness: Brightness.light,
-          textTheme: TextTheme(),
+          textTheme: TextTheme(headline6: TextStyle(color: kPrimaryText)),
           iconTheme: IconThemeData(
             color: Colors.black87,
           ),
@@ -22,13 +23,15 @@ class MyTheme {
         fontFamily: 'Roboto',
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: kBackgroundDark,
+        primaryTextTheme: TextTheme(),
         canvasColor: kAppBarThemeDark,
         cardColor: kAppBarThemeDark,
-        primaryColor: kPrimaryText,
+        primaryColor: kSecondaryText,
+        textTheme: TextTheme(bodyText2: TextStyle(color: kSecondaryText)),
         appBarTheme: AppBarTheme(
           color: kAppBarThemeDark,
-          brightness: Brightness.light,
-          textTheme: TextTheme(headline6: TextStyle(color: kPrimaryText)),
+          brightness: Brightness.dark,
+          textTheme: TextTheme(headline6: TextStyle(color: kSecondaryText)),
           iconTheme: IconThemeData(
             color: Colors.black,
           ),
@@ -37,7 +40,7 @@ class MyTheme {
 
   // Commons themes
   static Color kPrimaryText = Color.fromRGBO(83, 72, 61, 1);
-  static Color kSecondaryText = Color.fromRGBO(83, 72, 61, 1);
+  static Color kSecondaryText = Color.fromRGBO(244, 243, 243, 0.6);
   // light
   static Color kBackgroundLight = Color.fromRGBO(244, 243, 243, 1);
   static Color kAppBarThemeLigth = Colors.white;

@@ -47,8 +47,8 @@ class _SearchPageState extends State<SearchPage> {
                 child: Text(
                 'All Timezones',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor),
+                  fontWeight: FontWeight.bold,
+                ),
               ))
             : TextField(
                 controller: _queryController,
