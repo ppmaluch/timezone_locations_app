@@ -1,3 +1,4 @@
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 class ActionsCard extends StatelessWidget {
@@ -24,15 +25,16 @@ class ActionsCard extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.lightbulb,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: () {
-                  print("dark mode on");
-                },
-              ),
+              EasyDynamicThemeBtn()
+              // IconButton(
+              //   icon: Icon(
+              //     Icons.lightbulb,
+              //     color: Theme.of(context).primaryColor,
+              //   ),
+              //   onPressed: () {
+              //     EasyDynamicTheme.of(context).changeTheme();
+              //   },
+              // ),
             ],
           ),
         ),

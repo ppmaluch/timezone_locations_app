@@ -46,13 +46,19 @@ class _SearchPageState extends State<SearchPage> {
             ? Center(
                 child: Text(
                 'All Timezones',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor),
               ))
             : TextField(
                 controller: _queryController,
                 autofocus: true,
                 decoration: InputDecoration(
-                    hintText: 'Search Timezone', border: InputBorder.none),
+                    hintText: 'Search Timezone',
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor)),
                 onChanged: (value) {
                   _filterList(value);
                 },
@@ -97,7 +103,9 @@ class _SearchPageState extends State<SearchPage> {
                               vertical: 10, horizontal: 8),
                           child: Text(
                             filteredItems[index],
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).primaryColor),
                           ),
                         ),
                       ),

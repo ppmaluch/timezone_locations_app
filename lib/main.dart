@@ -1,3 +1,4 @@
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timezone_locations_app/core/res/theme_utils.dart';
@@ -7,7 +8,7 @@ import 'core/presentation/notifiers/providers.dart';
 import 'core/presentation/routes.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(EasyDynamicThemeWidget(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +19,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: Environments.homeRoute,
         routes: appRoutes,
-        themeMode: ThemeMode.system,
         theme: MyTheme.lightTheme(context),
         darkTheme: MyTheme.darkTheme(context),
+        themeMode: EasyDynamicTheme.of(context).themeMode,
+        // theme: ThemeData.light(),
+        // darkTheme: ThemeData.dark(),
+        // themeMode: EasyDynamicTheme.of(context).themeMode,
       ),
     );
   }
