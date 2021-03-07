@@ -1,7 +1,7 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone_locations_app/features/general/presentation/widgets/timezone_cards.dart';
+import 'package:timezone_locations_app/features/general/presentation/widgets/timezone_cards_carousel.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 import 'package:timezone_locations_app/features/world_timezone/presentation/notifiers/timezone_di_provider.dart';
 import 'package:timezone_locations_app/core/res/utils.dart';
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         ),
         // ActionsCard(),
         timezones.length > 0
-            ? TimeZoneCards(
+            ? TimeZoneCardsCarousel(
                 timezones: timezones,
               )
             : Container()
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _header({BuildContext context, List<WorldTimezone> timezones}) {
+  Widget _header({BuildContext context, List<WorldTimezone> timezones}) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.20,
       decoration: BoxDecoration(
