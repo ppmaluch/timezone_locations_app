@@ -7,7 +7,10 @@ class MyTheme {
         backgroundColor: kBackgroundLight,
         canvasColor: kAppBarThemeLigth,
         primaryColor: kPrimaryText,
-        textTheme: TextTheme(bodyText2: TextStyle(color: kPrimaryText)),
+        textTheme: TextTheme(
+          bodyText2: TextStyle(color: kPrimaryText),
+          headline5: TextStyle(color: kPrimaryText),
+        ),
         cardColor: kAppBarThemeLigth,
         appBarTheme: AppBarTheme(
           color: kAppBarThemeLigth,
@@ -27,7 +30,10 @@ class MyTheme {
         canvasColor: kAppBarThemeDark,
         cardColor: kAppBarThemeDark,
         primaryColor: kSecondaryText,
-        textTheme: TextTheme(bodyText2: TextStyle(color: kSecondaryText)),
+        textTheme: TextTheme(
+          bodyText2: TextStyle(color: kSecondaryText),
+          headline5: TextStyle(color: kSecondaryText),
+        ),
         appBarTheme: AppBarTheme(
           color: kAppBarThemeDark,
           brightness: Brightness.dark,
@@ -48,3 +54,12 @@ class MyTheme {
   static Color kAppBarThemeDark = Color(0xff282828);
   static Color kBackgroundDark = Color(0xff181818);
 }
+
+const kDefaultPadding = 20.0;
+const kCardAspectRatio = 12.0 / 16.0;
+const kWidgetAspectRatio = kCardAspectRatio * 1.2;
+const kDefaultShadow = BoxShadow(
+  offset: Offset(0, 4),
+  blurRadius: 4,
+  color: Colors.black26,
+);
