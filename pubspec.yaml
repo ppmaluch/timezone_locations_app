@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.3.3
   shared_preferences: ^2.0.3
   animations: ^2.0.0
+  cross_connectivity: ^2.0.1
 
 dev_dependencies:
   flutter_test:

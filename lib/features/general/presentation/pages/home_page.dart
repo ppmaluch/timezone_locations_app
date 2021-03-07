@@ -1,3 +1,4 @@
+import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,13 +46,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => _scaffoldKey.currentState.openDrawer()),
       actions: [
         EasyDynamicThemeBtn(),
-        IconButton(
-            icon: Icon(
-              Icons.search,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, Environments.searchRoute);
-            })
+        _actionsFromConnectivity(),
       ],
     );
   }
@@ -64,6 +59,7 @@ class _HomePageState extends State<HomePage> {
           context: context,
           timezones: timezones,
         ),
+
         // ActionsCard(),
         timezones.length > 0
             ? TimeZoneCardsCarousel(
@@ -115,6 +111,40 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  Widget _actionsFromConnectivity() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: ConnectivityBuilder(
+        builder: (context, isConnected, status) => Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _iconFromConnection(context, isConnected, status),
+            const SizedBox(width: 18),
+            isConnected == true
+                ? IconButton(
+                    icon: Icon(
+                      Icons.search,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Environments.searchRoute);
+                    })
+                : Icon(Icons.search_off)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Icon _iconFromConnection(
+      BuildContext context, bool isConnected, ConnectivityStatus status) {
+    if (isConnected && status == ConnectivityStatus.wifi) {
+      return Icon(Icons.signal_wifi_4_bar_rounded);
+    } else if (isConnected && status == ConnectivityStatus.mobile) {
+      return Icon(Icons.signal_cellular_4_bar_rounded);
+    }
+    return Icon(Icons.signal_wifi_off_rounded);
   }
 }
 
