@@ -93,10 +93,9 @@ class _TimeZoneCardsState extends State<TimeZoneCardsCarousel> {
                                               BorderRadius.circular(50),
                                           boxShadow: [kDefaultShadow],
                                           image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/img/timeZoneHeader.png"),
-                                            fit: BoxFit.cover,
-                                          ),
+                                              image: AssetImage(
+                                                  "assets/img/timeZoneHeader.png"),
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
                                     ),
@@ -125,8 +124,9 @@ class _TimeZoneCardsState extends State<TimeZoneCardsCarousel> {
                                             vertical: kDefaultPadding / 4,
                                           ),
                                           decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.white),
+                                            border: Border.all(
+                                                color: Theme.of(context)
+                                                    .primaryColor),
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),

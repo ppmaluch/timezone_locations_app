@@ -51,6 +51,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ))
             : TextField(
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 controller: _queryController,
                 autofocus: true,
                 decoration: InputDecoration(

@@ -31,15 +31,15 @@ class MyTheme {
         cardColor: kAppBarThemeDark,
         primaryColor: kSecondaryText,
         textTheme: TextTheme(
-          bodyText2: TextStyle(color: kSecondaryText),
-          headline5: TextStyle(color: kSecondaryText),
-        ),
+            bodyText2: TextStyle(color: kSecondaryText),
+            headline5: TextStyle(color: kSecondaryText),
+            button: TextStyle(color: kSecondaryText)),
         appBarTheme: AppBarTheme(
           color: kAppBarThemeDark,
           brightness: Brightness.dark,
           textTheme: TextTheme(headline6: TextStyle(color: kSecondaryText)),
           iconTheme: IconThemeData(
-            color: Colors.black,
+            color: kSecondaryText,
           ),
         ),
       );
