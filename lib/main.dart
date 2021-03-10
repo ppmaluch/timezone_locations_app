@@ -1,11 +1,10 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone_locations_app/core/res/theme_utils.dart';
-import 'package:timezone_locations_app/core/res/utils.dart';
+import 'package:timezone_locations_app/core/utils/utils.dart';
 
-import 'core/presentation/notifiers/providers.dart';
-import 'core/presentation/routes.dart';
+import 'core/notifiers/providers.dart';
+import 'core/routes.dart';
 
 void main() {
   runApp(EasyDynamicThemeWidget(child: MyApp()));

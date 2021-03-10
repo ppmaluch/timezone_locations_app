@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:timezone_locations_app/core/res/utils.dart';
+import 'package:timezone_locations_app/core/utils/utils.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 
 class TimeZoneCardsCarousel extends StatefulWidget {

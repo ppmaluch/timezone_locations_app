@@ -1,5 +1,5 @@
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 
-abstract class RemoteDatasource {
-  Future<WorldTimezone> getTimezoneInfo(String timezone);
+abstract class ILocal {
+  Future<void> addTimezoneToLocal(WorldTimezone worldTimezone);
 }

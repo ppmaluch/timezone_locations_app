@@ -2,10 +2,10 @@ import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone_locations_app/features/general/presentation/widgets/timezone_cards_carousel.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
-import 'package:timezone_locations_app/features/world_timezone/presentation/notifiers/timezone_di_provider.dart';
-import 'package:timezone_locations_app/core/res/utils.dart';
+import 'package:timezone_locations_app/core/utils/utils.dart';
+import 'package:timezone_locations_app/features/world_timezone/views/viewModels/timezone_di_provider.dart';
+import 'package:timezone_locations_app/features/world_timezone/views/widgets/timezone_cards_carousel.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
