@@ -120,8 +120,6 @@ class _HomePageState extends State<HomePage> {
         builder: (context, isConnected, status) => Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            _iconFromConnection(context, isConnected, status),
-            const SizedBox(width: 18),
             isConnected == true
                 ? IconButton(
                     icon: Icon(
@@ -130,21 +128,18 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.pushNamed(context, Environments.searchRoute);
                     })
-                : Icon(Icons.search_off)
+                : IconButton(
+                    icon: Icon(Icons.search_off),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('No esta conectado a internet'),
+                      ));
+                    },
+                  )
           ],
         ),
       ),
     );
-  }
-
-  Icon _iconFromConnection(
-      BuildContext context, bool isConnected, ConnectivityStatus status) {
-    if (isConnected && status == ConnectivityStatus.wifi) {
-      return Icon(Icons.signal_wifi_4_bar_rounded);
-    } else if (isConnected && status == ConnectivityStatus.mobile) {
-      return Icon(Icons.signal_cellular_4_bar_rounded);
-    }
-    return Icon(Icons.signal_wifi_off_rounded);
   }
 }
 
