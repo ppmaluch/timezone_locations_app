@@ -36,7 +36,6 @@ class _TimeZoneCardsState extends State<TimeZoneCardsCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO improve card styles
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

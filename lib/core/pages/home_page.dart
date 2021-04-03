@@ -2,6 +2,7 @@ import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone_locations_app/core/widgets/actions_card.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 import 'package:timezone_locations_app/core/utils/utils.dart';
 import 'package:timezone_locations_app/features/world_timezone/views/viewModels/timezone_di_provider.dart';
@@ -59,8 +60,7 @@ class _HomePageState extends State<HomePage> {
           context: context,
           timezones: timezones,
         ),
-
-        // ActionsCard(),
+        ActionsCard(),
         timezones.length > 0
             ? TimeZoneCardsCarousel(
                 timezones: timezones,

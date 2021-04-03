@@ -21,9 +21,6 @@ class MyApp extends StatelessWidget {
         theme: MyTheme.lightTheme(context),
         darkTheme: MyTheme.darkTheme(context),
         themeMode: EasyDynamicTheme.of(context).themeMode,
-        // theme: ThemeData.light(),
-        // darkTheme: ThemeData.dark(),
-        // themeMode: EasyDynamicTheme.of(context).themeMode,
       ),
     );
   }
