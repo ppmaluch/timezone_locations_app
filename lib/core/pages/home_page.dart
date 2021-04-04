@@ -94,10 +94,9 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
             child: CircleAvatar(
-              radius: 55.0,
-              backgroundColor: Colors.white,
-              backgroundImage: AssetImage("assets/img/timeZoneHeader.png"),
-            ),
+                radius: 55.0,
+                backgroundColor: Colors.white,
+                backgroundImage: _setBackground()),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.05,
@@ -168,6 +167,12 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  _setBackground() {
+    return Theme.of(context).brightness == Brightness.light
+        ? AssetImage("assets/img/TimeMonochromaticLight.png")
+        : AssetImage("assets/img/TimeMonochromaticDark.png");
   }
 }
 
