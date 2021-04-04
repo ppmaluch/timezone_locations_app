@@ -2,10 +2,12 @@ import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone_locations_app/core/shared_prefs/user_preferences.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 import 'package:timezone_locations_app/core/utils/utils.dart';
 import 'package:timezone_locations_app/features/world_timezone/views/viewModels/timezone_di_provider.dart';
 import 'package:timezone_locations_app/features/world_timezone/views/widgets/timezone_cards_carousel.dart';
+import 'package:timezone_locations_app/features/world_timezone/views/widgets/timezone_cards_grids.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -17,10 +19,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<WorldTimezone> timezones;
+  bool _isGridMode;
+  final prefs = UserPreferences();
 
   @override
   void initState() {
     super.initState();
+    _isGridMode = prefs.gridMode;
   }
 
   @override
@@ -59,11 +64,15 @@ class _HomePageState extends State<HomePage> {
           context: context,
           timezones: timezones,
         ),
-        // ActionsCard(),
+        _actionBar(),
         timezones.length > 0
-            ? TimeZoneCardsCarousel(
-                timezones: timezones,
-              )
+            ? prefs.gridMode
+                ? TimeZoneCardsGrids(
+                    timezones: timezones,
+                  )
+                : TimeZoneCardsCarousel(
+                    timezones: timezones,
+                  )
             : Container()
       ],
     );
@@ -137,6 +146,26 @@ class _HomePageState extends State<HomePage> {
                   )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _actionBar() {
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text("Grid Mode"),
+          Switch(
+              value: _isGridMode,
+              onChanged: (value) {
+                setState(() {
+                  _isGridMode = value;
+                  prefs.gridMode = value;
+                });
+              }),
+        ],
       ),
     );
   }
