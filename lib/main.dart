@@ -1,12 +1,17 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone_locations_app/core/shared_prefs/user_preferences.dart';
 import 'package:timezone_locations_app/core/utils/utils.dart';
 
 import 'core/notifiers/providers.dart';
 import 'core/routes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = UserPreferences();
+  await prefs.initPrefs();
   runApp(EasyDynamicThemeWidget(child: MyApp()));
 }
 
