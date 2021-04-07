@@ -12,6 +12,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _queryController;
   List<String> itemList = [];
   List filteredItems = [];
@@ -41,6 +42,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: !_isSearching
             ? Center(
@@ -121,15 +123,30 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _getTimezone(filteredItem) async {
-    if (filteredItem.toString().isEmpty) {
-      Provider.of<TimezoneProvider>(context, listen: false)
-          .setErrorMessage('Invalid element');
-    } else {
-      final result = await Provider.of<TimezoneProvider>(context, listen: false)
-          .fetchTimezone(filteredItem);
-      if (result) {
-        Navigator.of(context).pop();
+    if (!_alreadySearched(filteredItem)) {
+      if (filteredItem.toString().isEmpty) {
+        Provider.of<TimezoneProvider>(context, listen: false)
+            .setErrorMessage('Invalid element');
+      } else {
+        final result =
+            await Provider.of<TimezoneProvider>(context, listen: false)
+                .fetchTimezone(filteredItem);
+        if (result) {
+          Navigator.of(context).pop();
+        }
       }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          new SnackBar(content: Text("Ya se buscó este elemento")));
     }
+  }
+
+  bool _alreadySearched(value) {
+    final timezones =
+        Provider.of<TimezoneProvider>(context, listen: false).getTimezones();
+    for (var timezone in timezones) {
+      if (timezone.timezone.contains(value)) return true;
+    }
+    return false;
   }
 }
