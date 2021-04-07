@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      timezones = Provider.of<TimezoneProvider>(context).getTimezone();
+      timezones = Provider.of<TimezoneProvider>(context).getTimezones();
     });
     return Scaffold(
         key: _scaffoldKey,

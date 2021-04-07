@@ -40,7 +40,7 @@ class TimezoneProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<WorldTimezone> getTimezone() {
+  List<WorldTimezone> getTimezones() {
     return timezone;
   }
 
