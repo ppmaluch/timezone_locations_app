@@ -1,4 +1,4 @@
-package com.example.timezone_locations_app
+package com.homeadventures.timezone_locations_app
 
 import io.flutter.embedding.android.FlutterActivity
 

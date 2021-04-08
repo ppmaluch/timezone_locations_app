@@ -40,8 +40,8 @@ android {
         applicationId "com.homeadventures.timezone_locations_app"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 1
+        versionName "1.0.0"
     }
 
     buildTypes {
