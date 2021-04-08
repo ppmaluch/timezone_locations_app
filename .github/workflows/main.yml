@@ -27,9 +27,9 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: "30.0.3"
-          SIGNED_RELEASE_FILE: "timezone app"
+          SIGNED_RELEASE_FILE: "timezone-app"
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
-          artifacts: build/app/outputs/apk/release/app-release-signed.apk
+          artifacts: build/app/outputs/apk/release/timezone-app.apk
           token: ${{ secrets.GITHUB_TOKEN }}
