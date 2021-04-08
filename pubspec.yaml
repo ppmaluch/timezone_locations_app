@@ -25,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   animations: ^2.0.0
+  badges: ^1.2.0
   cross_connectivity: ^2.0.1
   cupertino_icons: ^1.0.0
   easy_dynamic_theme: ^2.0.0

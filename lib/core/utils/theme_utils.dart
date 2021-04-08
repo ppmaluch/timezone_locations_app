@@ -7,6 +7,7 @@ class MyTheme {
         backgroundColor: kBackgroundLight,
         canvasColor: kAppBarThemeLigth,
         primaryColor: kPrimaryText,
+        brightness: Brightness.light,
         textTheme: TextTheme(
           bodyText2: TextStyle(color: kPrimaryText),
           headline5: TextStyle(color: kPrimaryText),
@@ -30,6 +31,7 @@ class MyTheme {
         canvasColor: kAppBarThemeDark,
         cardColor: kAppBarThemeDark,
         primaryColor: kSecondaryText,
+        brightness: Brightness.dark,
         textTheme: TextTheme(
             bodyText2: TextStyle(color: kSecondaryText),
             headline5: TextStyle(color: kSecondaryText),

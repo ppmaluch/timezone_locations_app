@@ -1,6 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone_locations_app/core/utils/utils.dart';
 import 'package:timezone_locations_app/features/world_timezone/domain/model/world_timezone_model.dart';
 import 'package:timezone_locations_app/features/world_timezone/views/viewModels/timezone_di_provider.dart';
 
@@ -59,48 +61,54 @@ class _TimeZoneCardsState extends State<TimeZoneCardsGrids> {
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
               itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.all(20),
-                  height: index.isEven ? 200 : 240,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    image: DecorationImage(
-                      image: AssetImage("assets/img/timeZoneHeader.png"),
-                      fit: BoxFit.fill,
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, Environments.detailRoute,
+                        arguments: widget.timezones[index]);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    height: index.isEven ? 200 : 240,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: AssetImage("assets/img/timeZoneHeader.png"),
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            Provider.of<TimezoneProvider>(context,
-                                    listen: false)
-                                .delTimezone(widget.timezones[index].timezone);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Text(
-                              '[X]',
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<TimezoneProvider>(context,
+                                        listen: false)
+                                    .delTimezone(
+                                        widget.timezones[index].timezone);
+                              });
+                            },
+                            child: Badge(
+                              badgeContent: Icon(Icons.close),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        "${widget.timezones[index].timezone.split("/").first}/${widget.timezones[index].timezone.split("/").last}",
-                        style: Theme.of(context).textTheme.headline5.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      Text(
-                        "${widget.timezones[index].dayOfWeek}/w",
-                        style: Theme.of(context).textTheme.headline5.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                      )
-                    ],
+                        Text(
+                          "${widget.timezones[index].timezone.split("/").first}/${widget.timezones[index].timezone.split("/").last}",
+                          style: Theme.of(context).textTheme.headline5.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        Text(
+                          "${widget.timezones[index].dayOfWeek}/w",
+                          style: Theme.of(context).textTheme.headline5.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
