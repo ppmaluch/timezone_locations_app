@@ -4,6 +4,7 @@ class Environments {
   // routesNames
   static String homeRoute = "home";
   static String searchRoute = "search";
+  static String detailRoute = "details";
 
   //Apikeys
   static String unsplashApiKey =
